@@ -54,7 +54,7 @@ class _HomeScreen extends State<HomeScreen> {
         child: ListView(
           children: <Widget>[
             SizedBox(height: 10,),
-            Center(child: Text("Steganography",style: TextStyle(fontSize: 30,color: Colors.white.withOpacity(0.8)),),),
+            Center(child: Text("Steganography!",style: TextStyle(fontSize: 30,color: Colors.white.withOpacity(0.8)),),),
             SizedBox(height: 10,),
             HomeScreenStartEncodeBtn(),
 
