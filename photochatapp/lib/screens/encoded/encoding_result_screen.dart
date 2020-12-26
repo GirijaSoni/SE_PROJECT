@@ -80,7 +80,6 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
     });
     dynamic response = await ImageGallerySaver.saveImage(imageData);
     print(response);
-    this.uploadPic(response);
     if (response.toString().toLowerCase().contains('not found')) {
       setState(() {
         this.savingState = LoadingState.ERROR;
@@ -97,14 +96,12 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
     var storageReference = FirebaseStorage.instance
         .ref()
         .child("Images")
-        .child('${path.basename(img.path)}');
-    var uploadTask = storageReference.putFile(img);
-    await uploadTask.whenComplete(() {
-      storageReference.getDownloadURL().then((fileURL) async {
-        User user = FirebaseAuth.instance.currentUser;
-        await DatabaseService(uid: user.uid).saveImage(fileURL);
-      });
-    });
+        .child('${DateTime.now()}');
+    var url = await storageReference
+        .putData(imageData)
+        .then((res) => res.ref.getDownloadURL());
+    User user = FirebaseAuth.instance.currentUser;
+    await DatabaseService(uid: user.uid).saveImage(url);
     print('File Uploaded');
   }
 
@@ -163,8 +160,8 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                           child: RaisedButton(
                             color: Color(0xff5a5a5c),
                             onPressed: () {
-                              this.uploadPic(snapshot.data.encodedByteImage);
                               this.saveImage(snapshot.data.encodedByteImage);
+                              this.uploadPic(snapshot.data.encodedByteImage);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

@@ -19,19 +19,14 @@ class DatabaseService {
     }
   }
 
-  Future<String> getNumber() async {
-    String number = "";
-    await userCollection
-        .doc(uid)
-        .collection("EmergencyContacts")
-        .orderBy("priority")
-        .get()
-        .then((snapshot) {
-      number = snapshot.docs[0].data()['number'];
+  Future<List<String>> getImages() async {
+    List<String> images = [];
+    await userCollection.doc(uid).collection("Images").get().then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        images.add(ds.data()['image']);
+      }
     });
-    print("num");
-    print(number);
-    return number;
+    return images;
   }
 
   Future updateUserData(String fname, String lname, String email) async {
