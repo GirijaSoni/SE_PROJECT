@@ -17,6 +17,7 @@ class _SignUp extends State<SignUp> {
   String _firstname = '';
   String _lastname = '';
   String _password = '';
+  String errorMessage = '';
   String _newpassword = '';
   bool _isLoading = false;
 
@@ -173,14 +174,46 @@ class _SignUp extends State<SignUp> {
                 child: RaisedButton(
                   color: Colors.amber,
                   onPressed: () async {
-                    bool check = await Provider.of<AuthenticationService>(
-                            context,
-                            listen: false)
-                        .signUp(_firstname, _lastname, _email, _password);
-                    if (check)
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => HomeScreen()));
-                  },
+    try {
+    bool check = await Provider.of<AuthenticationService>(
+    context,
+    listen: false)
+        .signUp(_firstname, _lastname, _email, _password);
+    if (check)
+    Navigator.of(context).push(MaterialPageRoute(
+    builder: (context) => HomeScreen()));
+    } catch (error) {
+    switch (error.code) {
+    case "ERROR_INVALID_EMAIL":
+    errorMessage = "Your email address appears to be malformed.";
+    break;
+    case "ERROR_WRONG_PASSWORD":
+    errorMessage = "Your password is wrong.";
+    break;
+    case "ERROR_USER_NOT_FOUND":
+    errorMessage = "User with this email doesn't exist.";
+    break;
+    case "ERROR_USER_DISABLED":
+    errorMessage = "User with this email has been disabled.";
+    break;
+    case "ERROR_TOO_MANY_REQUESTS":
+    errorMessage = "Too many requests. Try again later.";
+    break;
+    case "ERROR_OPERATION_NOT_ALLOWED":
+    errorMessage = "Signing in with Email and Password is not enabled.";
+    break;
+    default:
+    errorMessage = "An undefined Error happened.";
+    }
+    }
+    print(errorMessage);
+
+    if (errorMessage != null) {
+
+    return Future.error(errorMessage);
+
+
+                  };},
                   child: Text(
                     "SIGN UP",
                     style: TextStyle(fontSize: 15, color: Colors.white),
