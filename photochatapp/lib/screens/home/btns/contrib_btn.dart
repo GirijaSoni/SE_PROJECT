@@ -13,11 +13,10 @@ class HomeScreenContribBtn extends StatelessWidget {
       return Container();
     }
     return RaisedButton(
-      onPressed: Provider.of<AppContext>(context).isReady()
-          ? () {
-              Navigator.pushNamed(context, '/contribute');
-            }
-          : null,
+      onPressed:  () {
+              // Navigator.pushNamed(context, '/contribute');
+  }
+        ,
       key: Key('home_screen_contribute_btn'),
       color:Color(0xff5a5a5c),
       child: Container(
