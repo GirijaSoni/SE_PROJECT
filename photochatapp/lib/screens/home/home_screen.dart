@@ -41,9 +41,9 @@ class _HomeScreen extends State<HomeScreen> {
         backgroundColor: Color(0xff231f20),
         actions: [
           IconButton(
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.power_settings_new,color: Colors.white,),
               onPressed: () {
-                Navigator.pushNamed(context, '/settings');
+                Navigator.pushNamed(context, '/login');
               }),
         ],
       ),
