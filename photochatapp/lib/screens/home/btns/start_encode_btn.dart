@@ -10,6 +10,7 @@ class HomeScreenStartEncodeBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
+      color: Color(0xff5a5a5c),
       onPressed: Provider.of<AppContext>(context).isReady()
           ? () {
               Navigator.pushNamed(context, '/send');
@@ -20,11 +21,8 @@ class HomeScreenStartEncodeBtn extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.email),
-            SizedBox(
-              width: 15.0,
-            ),
-            Text(AppLocalizations.of(context).encodeBtnText),
+
+            Text("ENCODE",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
           ],
         ),
       ),

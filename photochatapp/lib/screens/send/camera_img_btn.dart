@@ -25,16 +25,13 @@ class SendScreenCameraImageBtn extends StatelessWidget {
     return Container(
       child: RaisedButton(
         onPressed: this.onOpenHandler,
+        color: Color(0xff5a5a5c),
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ButtonLogoWithLoadingAndError(
-                  this.loadingState, Icons.camera_alt),
-              SizedBox(
-                width: 15.0,
-              ),
-              Text(AppLocalizations.of(context).encodeScreenCameraBtnText),
+
+              Text("CAMERA",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
             ],
           ),
         ),

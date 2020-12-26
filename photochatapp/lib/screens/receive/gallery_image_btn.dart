@@ -19,17 +19,15 @@ class ReceiveScreenGallertyImageBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: RaisedButton(
+        color: Color(0xff5a5a5c),
         key: Key('decode_pick_image_from_gallery_btn'),
         onPressed: this.onUploadHandler,
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ButtonLogoWithLoadingAndError(this.loadingState, Icons.camera),
-              SizedBox(
-                width: 15.0,
-              ),
-              Text(AppLocalizations.of(context).decodeScreenGalleryBtnText),
+
+              Text("GALLERY",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
             ],
           ),
         ),

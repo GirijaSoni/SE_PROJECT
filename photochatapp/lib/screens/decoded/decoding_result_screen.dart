@@ -38,11 +38,13 @@ class _DecodingResultScreen extends State<DecodingResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xff303030),
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).decodeResultScreenTitle),
+          backgroundColor: Color(0xff231f20),
+          title: Text(AppLocalizations.of(context).decodeResultScreenTitle,style: TextStyle(color: Colors.white)),
           leading: IconButton(
               key: Key('decoded_screen_back_btn'),
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -63,7 +65,7 @@ class _DecodingResultScreen extends State<DecodingResultScreen> {
                         Container(
                           child: Text(
                             'Decoded Message: ',
-                            style: TextStyle(fontSize: 20.0),
+                            style: TextStyle(fontSize: 20.0,color: Colors.white,fontWeight: FontWeight.bold),
                           ),
                         ),
                         SizedBox(
@@ -73,18 +75,14 @@ class _DecodingResultScreen extends State<DecodingResultScreen> {
                           child: Center(
                             child: Text(
                               snapshot.data,
-                              style: TextStyle(fontSize: 20.0),
+                              style: TextStyle(fontSize: 20.0,color: Colors.white,fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                         SizedBox(
                           height: 30.0,
                         ),
-                        Container(
-                            child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset('assets/rabbits_clapping.gif'),
-                        )),
+
                       ],
                     ),
                   );
@@ -100,7 +98,7 @@ class _DecodingResultScreen extends State<DecodingResultScreen> {
                           child: Center(
                               child: Text(
                             'Whoops >_<',
-                            style: TextStyle(fontSize: 30.0),
+                            style: TextStyle(fontSize: 30.0,color: Colors.white),
                           )),
                         ),
                         SizedBox(
@@ -108,16 +106,12 @@ class _DecodingResultScreen extends State<DecodingResultScreen> {
                         ),
                         Container(
                           child: Center(
-                              child: Text('It seems something went wrong')),
+                              child: Text('It seems something went wrong',style: TextStyle(fontSize: 30.0,color: Colors.white),)),
                         ),
                         SizedBox(
                           height: 5.0,
                         ),
-                        Container(
-                            child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset('assets/bear_bye.gif'),
-                        )),
+
                       ],
                     ),
                   );
@@ -128,19 +122,14 @@ class _DecodingResultScreen extends State<DecodingResultScreen> {
                         SizedBox(
                           height: 5.0,
                         ),
-                        Container(
-                            padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.asset('assets/loading_donkey.gif'),
-                            )),
+
                         SizedBox(
                           height: 5.0,
                         ),
                         Container(
                           padding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 0.0),
                           child: Text(
-                              'Please be patient, mini donkey is decoding your message...'),
+                              'Decoding your message...',style: TextStyle(fontSize: 20.0,color: Colors.white,fontWeight: FontWeight.bold),),
                         ),
                       ],
                     ),

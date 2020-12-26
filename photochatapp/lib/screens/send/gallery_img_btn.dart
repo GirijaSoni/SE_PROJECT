@@ -26,15 +26,13 @@ class SendScreenGalleryImageBtn extends StatelessWidget {
       child: RaisedButton(
         key: Key('encode_pick_image_from_gallery_btn'),
         onPressed: this.onUploadHandler,
+        color: Color(0xff5a5a5c),
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ButtonLogoWithLoadingAndError(this.loadingState, Icons.camera),
-              SizedBox(
-                width: 15.0,
-              ),
-              Text(AppLocalizations.of(context).encodeScreenGalleryBtnText),
+
+              Text("GALLERY",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
             ],
           ),
         ),

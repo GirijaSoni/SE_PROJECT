@@ -3,6 +3,8 @@ import 'package:photochatapp/screens/contribute/contribute_screen.dart';
 import 'package:photochatapp/screens/decoded/decoding_result_screen.dart';
 import 'package:photochatapp/screens/encoded/encoding_result_screen.dart';
 import 'package:photochatapp/screens/home/home_screen.dart';
+import 'package:photochatapp/screens/login/SignUp.dart';
+import 'package:photochatapp/screens/login/login.dart';
 import 'package:photochatapp/screens/receive/receive_screen.dart';
 import 'package:photochatapp/screens/send/send_screen.dart';
 import 'package:photochatapp/screens/settings/settings_screen.dart';
@@ -39,8 +41,10 @@ class PhotoChatApp extends StatelessWidget {
         theme: appTheme.getLightTheme(),
         darkTheme: appTheme.getDarkTheme(),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
+        initialRoute: '/login',
         routes: {
+          '/login':(context) => Login(),
+          '/signup':(context) => SignUp(),
           '/': (context) => HomeScreen(),
           '/send': (context) => SendScreen(),
           '/receive': (context) => ReceiveScreen(),

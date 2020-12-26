@@ -10,21 +10,20 @@ class HomeScreenStartDecodeBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
+      color: Color(0xff5a5a5c),
       onPressed: Provider.of<AppContext>(context).isReady()
           ? () {
               Navigator.pushNamed(context, '/receive');
             }
+
           : null,
       key: Key('home_screen_decode_message_btn'),
       child: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.drafts),
-            SizedBox(
-              width: 15.0,
-            ),
-            Text(AppLocalizations.of(context).decodeBtnText),
+
+            Text("DECODE",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))
           ],
         ),
       ),

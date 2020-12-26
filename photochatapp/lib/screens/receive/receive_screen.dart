@@ -83,11 +83,13 @@ class _ReceiveScreen extends State<ReceiveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xff303030),
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).decodeScreenTitleText),
+          backgroundColor: Color(0xff231f20),
+          title: Text(AppLocalizations.of(context).decodeScreenTitleText,style: TextStyle(color: Colors.white),),
           leading: IconButton(
               key: Key('receive_screen_back_btn'),
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -126,6 +128,7 @@ class _ReceiveScreen extends State<ReceiveScreen> {
                     children: <Widget>[
                       Checkbox(
                           key: Key('decode_encrypt_checkbox'),
+
                           value: this.decrypt,
                           onChanged: (bool nextVal) {
                             setState(() {
@@ -133,7 +136,7 @@ class _ReceiveScreen extends State<ReceiveScreen> {
                             });
                           }),
                       Text(AppLocalizations.of(context)
-                          .decodeScreenDecryptCheckboxText),
+                          .decodeScreenDecryptCheckboxText,style: TextStyle(color: Colors.white),),
                     ],
                   ),
                 ),
@@ -145,6 +148,7 @@ class _ReceiveScreen extends State<ReceiveScreen> {
                     this.decrypt,
                     this.tokenCtrl,
                     keyVal: 'decode_screen_token_input',
+
                   ),
                 ),
                 SizedBox(

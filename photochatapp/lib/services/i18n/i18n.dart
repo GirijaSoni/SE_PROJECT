@@ -46,7 +46,7 @@ class AppLocalizations {
 
   String get decodeBtnText {
     return Intl.message(
-      'Decode',
+      'DECODE',
       name: 'decodeBtnText',
       desc: 'Text for the decoding button',
       locale: localeName,

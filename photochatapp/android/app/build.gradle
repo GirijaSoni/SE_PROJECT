@@ -55,7 +55,7 @@ android {
        release {
            keyAlias System.getenv('ANDROID_DEBUG') ? null : keystoreProperties['keyAlias']
            keyPassword System.getenv('ANDROID_DEBUG') ? null : keystoreProperties['keyPassword']
-           storeFile System.getenv('ANDROID_DEBUG') ? null : file(keystoreProperties['storeFile'])
+           //storeFile System.getenv('ANDROID_DEBUG') ? null : file(keystoreProperties['storeFile'])
            storePassword System.getenv('ANDROID_DEBUG') ? null : keystoreProperties['storePassword']
        }
     }

@@ -19,16 +19,13 @@ class HomeScreenContribBtn extends StatelessWidget {
             }
           : null,
       key: Key('home_screen_contribute_btn'),
-      color: Colors.pinkAccent,
+      color:Color(0xff5a5a5c),
       child: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.favorite),
-            SizedBox(
-              width: 15.0,
-            ),
-            Text(AppLocalizations.of(context).contribBtnText),
+
+            Text("DATABASE",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
           ],
         ),
       ),

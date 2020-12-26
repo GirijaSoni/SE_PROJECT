@@ -185,7 +185,7 @@ class _SendScreen extends State<SendScreen> {
     this.encrypt = false;
     this.uploadingState = LoadingState.PENDING;
     this.pickedImg = false;
-    this.capacityUsage = 'Not applicable, no image uploaded';
+    this.capacityUsage = '';
     this.capacityUsageStats = 0.0;
     this.imageByteSize = 0;
   }
@@ -193,13 +193,16 @@ class _SendScreen extends State<SendScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff303030),
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).encodeScreenTitle),
+          backgroundColor:   Color(0xff231f20),
+          title: Text(AppLocalizations.of(context).encodeScreenTitle,style: TextStyle(color: Colors.white),),
           leading: IconButton(
               key: Key('send_screen_back_btn'),
               icon: Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.pop(context);
+
               }),
         ),
         body: ScreenAdapter(
@@ -212,13 +215,6 @@ class _SendScreen extends State<SendScreen> {
                   height: 5.0,
                 ),
                 SendScreenImageReview(this.image),
-                SizedBox(
-                  height: 5.0,
-                ),
-                SendScreenRandomWebImageBtn(
-                  onFetchHandler: this.randomImageFromWeb,
-                  loadingState: this.uploadingState,
-                ),
                 SizedBox(
                   height: 5.0,
                 ),
@@ -244,6 +240,7 @@ class _SendScreen extends State<SendScreen> {
                 ),
                 Container(
                   child: LinearProgressIndicator(
+                    backgroundColor: Colors.white,
                     value: this.capacityUsageStats,
                   ),
                 ),
@@ -254,9 +251,15 @@ class _SendScreen extends State<SendScreen> {
                   child: TextField(
                     key: Key('encode_screen_msg_input'),
                     controller: this.msgCtrl,
+                    cursorColor: Colors.white,
                     onChanged: this.onMessageChange,
                     decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      hoverColor: Colors.white,
                       labelText: 'Message',
+                      fillColor: Colors.white,
+
+                      labelStyle: TextStyle(color: Colors.white)
                     ),
                   ),
                 ),
@@ -267,20 +270,23 @@ class _SendScreen extends State<SendScreen> {
                   child: Row(
                     children: <Widget>[
                       Checkbox(
+
                           key: Key('encode_screen_token_checkbox'),
                           value: this.encrypt,
+
                           onChanged: (bool nextVal) {
                             setState(() {
                               this.encrypt = nextVal;
                             });
                           }),
-                      Text('Encrypt my message!'),
+                      Text('Encrypt my message!',style: TextStyle(fontSize: 20,color: Colors.white),),
                     ],
                   ),
                 ),
                 TokenInputField(
                   this.encrypt,
                   this.tokenCtrl,
+
                   keyVal: 'encode_screen_token_input',
                 ),
                 SizedBox(
@@ -290,16 +296,13 @@ class _SendScreen extends State<SendScreen> {
                   child: RaisedButton(
                     key: Key('encode_screen_encode_btn'),
                     onPressed: this.sendToEncode,
+                    color: Color(0xff5a5a5c),
                     child: Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.email),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(AppLocalizations.of(context)
-                              .encodeScreenEncodeBtnText),
+
+                          Text("ENCODE",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),

@@ -100,11 +100,13 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff303030),
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).encodeResultScreenTitleText),
+          backgroundColor: Color(0xff231f20),
+          title: Text(AppLocalizations.of(context).encodeResultScreenTitleText,style: TextStyle(color: Colors.white),),
           leading: IconButton(
               key: Key('encoded_screen_back_btn'),
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -133,6 +135,7 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                         ),
                         Container(
                           child: RaisedButton(
+                            color: Color(0xff5a5a5c),
                             onPressed: () {
                               this.saveImage(snapshot.data.encodedByteImage);
                             },
@@ -144,8 +147,7 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                                 SizedBox(
                                   width: 20.0,
                                 ),
-                                Text(AppLocalizations.of(context)
-                                    .encodeResultScreenSaveBtnText),
+                                Text("SAVE"),
                               ],
                             ),
                           ),
@@ -161,11 +163,7 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                         SizedBox(
                           height: 30.0,
                         ),
-                        Container(
-                            child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset('assets/rabbits_clapping.gif'),
-                        )),
+
                       ],
                     ),
                   );
@@ -195,11 +193,7 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                         SizedBox(
                           height: 5.0,
                         ),
-                        Container(
-                            child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset('assets/bear_bye.gif'),
-                        )),
+
                       ],
                     ),
                   );
@@ -207,16 +201,16 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                   return Container(
                     child: ListView(
                       children: <Widget>[
-                        Container(
-                            padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.asset('assets/loading_donkey.gif'),
-                            )),
+                        // Container(
+                        //     padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
+                        //     child: ClipRRect(
+                        //       borderRadius: BorderRadius.circular(8.0),
+                        //       child: Image.asset('assets/loading_donkey.gif'),
+                        //     )),
                         Container(
                           padding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 0.0),
                           child: Text(
-                              'Please be patient, mini donkey is encoding your message...'),
+                              'Your message is being encoded...',style: TextStyle(fontSize: 20,color: Colors.white),),
                         ),
                       ],
                     ),

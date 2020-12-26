@@ -15,6 +15,7 @@ class EncodeResultScreenShareBtn extends StatelessWidget {
     }
     return Container(
       child: RaisedButton(
+        color: Color(0xff5a5a5c),
         onPressed: this.onShareHandler,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -23,7 +24,7 @@ class EncodeResultScreenShareBtn extends StatelessWidget {
             SizedBox(
               width: 20.0,
             ),
-            Text(AppLocalizations.of(context).encodeResultScreenShareBtnText),
+            Text("SHARE",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
           ],
         ),
       ),

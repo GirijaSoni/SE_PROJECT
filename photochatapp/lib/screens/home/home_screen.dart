@@ -30,11 +30,15 @@ class _HomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff303030),
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context).title,
+          "Steganography",
+          style: TextStyle(color: Colors.white),
           key: Key('home_screen_title'),
+
         ),
+        backgroundColor: Color(0xff231f20),
         actions: [
           IconButton(
               icon: Icon(Icons.settings),
@@ -49,25 +53,13 @@ class _HomeScreen extends State<HomeScreen> {
         padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
         child: ListView(
           children: <Widget>[
-            SizedBox(
-              height: 10.0,
-            ),
-            HomeScreenDonkeyLogo(),
-            SizedBox(
-              height: 10.0,
-            ),
-            HomeScreenMessageLogo(),
-            SizedBox(
-              height: 5.0,
-            ),
+            SizedBox(height: 10,),
+            Center(child: Text("Steganography",style: TextStyle(fontSize: 30,color: Colors.white.withOpacity(0.8)),),),
+            SizedBox(height: 10,),
             HomeScreenStartEncodeBtn(),
-            SizedBox(
-              height: 5.0,
-            ),
+
             HomeScreenStartDecodeBtn(),
-            SizedBox(
-              height: 5.0,
-            ),
+
             HomeScreenContribBtn(),
           ],
         ),
