@@ -90,7 +90,6 @@ DecodeResponse getMockedDecodeResult() {
   DecodeResponse response = DecodeResponse(msg);
   return response;
 }
-
 Future<DecodeResponse> decodeMessageFromImageAsync(DecodeRequest req,
     {BuildContext context}) async {
   if (context != null) {

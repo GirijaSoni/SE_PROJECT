@@ -14,7 +14,7 @@ class HomeScreenContribBtn extends StatelessWidget {
     }
     return RaisedButton(
       onPressed:  () {
-              // Navigator.pushNamed(context, '/contribute');
+               Navigator.pushNamed(context, '/database');
   }
         ,
       key: Key('home_screen_contribute_btn'),

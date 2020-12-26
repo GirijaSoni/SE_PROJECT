@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photochatapp/screens/contribute/contribute_screen.dart';
+import 'package:photochatapp/screens/database/database.dart';
 import 'package:photochatapp/screens/decoded/decoding_result_screen.dart';
 import 'package:photochatapp/screens/encoded/encoding_result_screen.dart';
 import 'package:photochatapp/screens/home/home_screen.dart';
@@ -52,6 +53,8 @@ class PhotoChatApp extends StatelessWidget {
           '/decoded': (context) => DecodingResultScreen(),
           '/contribute': (context) => ContributeScreen(),
           '/settings': (context) => SettingsScreen(),
+          '/database':(context) => Database(),
+
         },
       );
     });
