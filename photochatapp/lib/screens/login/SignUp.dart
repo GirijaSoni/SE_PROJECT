@@ -17,6 +17,7 @@ class _SignUp extends State<SignUp> {
   String _firstname = '';
   String _lastname = '';
   String _password = '';
+  String errorMessage = '';
   String _newpassword = '';
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
