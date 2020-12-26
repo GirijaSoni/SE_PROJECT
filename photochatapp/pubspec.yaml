@@ -39,6 +39,11 @@ dependencies:
   device_info: ^0.4.2+1
   hive: ^1.4.1+1
   hive_flutter: ^0.3.0+2
+  firebase_core:
+  firebase_auth:
+  cloud_firestore:
+  firebase_storage:
+  path:
 
 dev_dependencies:
   flutter_test:

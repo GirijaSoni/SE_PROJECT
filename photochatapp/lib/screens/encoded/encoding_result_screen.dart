@@ -1,12 +1,15 @@
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photochatapp/components/alerts/dialog.dart';
 import 'package:photochatapp/components/btn_logo/btn_logo_with_loading_error.dart';
 import 'package:photochatapp/components/screen_adapter/screen_adapter.dart';
 import 'package:photochatapp/screens/encoded/share_btn.dart';
+import 'package:photochatapp/services/DatabaseService.dart';
 import 'package:photochatapp/services/encoder.dart';
 import 'package:photochatapp/services/i18n/i18n.dart';
 import 'package:photochatapp/services/requests/encode_request.dart';
@@ -77,6 +80,7 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
     });
     dynamic response = await ImageGallerySaver.saveImage(imageData);
     print(response);
+    this.uploadPic(response);
     if (response.toString().toLowerCase().contains('not found')) {
       setState(() {
         this.savingState = LoadingState.ERROR;
@@ -86,6 +90,22 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
     setState(() {
       this.savingState = LoadingState.SUCCESS;
     });
+  }
+
+  Future uploadPic(Uint8List imageData) async {
+    File img = File.fromRawPath(imageData);
+    var storageReference = FirebaseStorage.instance
+        .ref()
+        .child("Images")
+        .child('${path.basename(img.path)}');
+    var uploadTask = storageReference.putFile(img);
+    await uploadTask.whenComplete(() {
+      storageReference.getDownloadURL().then((fileURL) async {
+        User user = FirebaseAuth.instance.currentUser;
+        await DatabaseService(uid: user.uid).saveImage(fileURL);
+      });
+    });
+    print('File Uploaded');
   }
 
   Future<void> shareImage(List<int> imageData) async {
@@ -100,13 +120,19 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff303030),
+        backgroundColor: Color(0xff303030),
         appBar: AppBar(
           backgroundColor: Color(0xff231f20),
-          title: Text(AppLocalizations.of(context).encodeResultScreenTitleText,style: TextStyle(color: Colors.white),),
+          title: Text(
+            AppLocalizations.of(context).encodeResultScreenTitleText,
+            style: TextStyle(color: Colors.white),
+          ),
           leading: IconButton(
               key: Key('encoded_screen_back_btn'),
-              icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -137,6 +163,7 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                           child: RaisedButton(
                             color: Color(0xff5a5a5c),
                             onPressed: () {
+                              this.uploadPic(snapshot.data.encodedByteImage);
                               this.saveImage(snapshot.data.encodedByteImage);
                             },
                             child: Row(
@@ -163,7 +190,6 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                         SizedBox(
                           height: 30.0,
                         ),
-
                       ],
                     ),
                   );
@@ -193,7 +219,6 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                         SizedBox(
                           height: 5.0,
                         ),
-
                       ],
                     ),
                   );
@@ -210,7 +235,9 @@ class _EncodingResultScreen extends State<EncodingResultScreen> {
                         Container(
                           padding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 0.0),
                           child: Text(
-                              'Your message is being encoded...',style: TextStyle(fontSize: 20,color: Colors.white),),
+                            'Your message is being encoded...',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
                         ),
                       ],
                     ),

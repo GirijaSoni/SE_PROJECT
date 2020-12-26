@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:photochatapp/screens/home/home_screen.dart';
+import 'package:photochatapp/services/AuthenticationService.dart';
+import 'package:provider/provider.dart';
 
 import 'login.dart';
-class SignUp extends StatefulWidget{
+
+class SignUp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _SignUp() ;
+    return _SignUp();
   }
-
 }
 
 class _SignUp extends State<SignUp> {
   String _email = '';
-  String _firstname= '';
-  String _lastname='';
+  String _firstname = '';
+  String _lastname = '';
   String _password = '';
   String _newpassword = '';
   bool _isLoading = false;
@@ -22,6 +24,7 @@ class _SignUp extends State<SignUp> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,23 +33,34 @@ class _SignUp extends State<SignUp> {
         child: Padding(
           padding: EdgeInsets.all(30),
           child: Column(
-            children:<Widget> [
-              SizedBox(height: 100,),
-              Text("STEGANOGRAPHY",style: TextStyle(fontStyle: FontStyle.italic,color: Colors.amber,fontSize: 30,fontWeight: FontWeight.bold),),
-              SizedBox(height: 30,),
+            children: <Widget>[
+              SizedBox(
+                height: 100,
+              ),
+              Text(
+                "STEGANOGRAPHY",
+                style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: Colors.amber,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 30,
+              ),
               SizedBox(
                 height: 20,
               ),
               TextFormField(
                 onChanged: (String value) {
                   setState(() {
-                    _firstname= value;
+                    _firstname = value;
                   });
                 },
                 validator: (String value) {
                   if (value.isEmpty) {
                     return "First name is required!";
-                  }  else {
+                  } else {
                     return null;
                   }
                 },
@@ -54,20 +68,20 @@ class _SignUp extends State<SignUp> {
                     labelStyle: TextStyle(color: Colors.grey),
                     labelText: "First Name"),
                 cursorColor: Colors.grey,
-
               ),
-              SizedBox(height: 20,),
-
+              SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 onChanged: (String value) {
                   setState(() {
-                    _lastname= value;
+                    _lastname = value;
                   });
                 },
                 validator: (String value) {
                   if (value.isEmpty) {
                     return "Last name is required!";
-                  }  else {
+                  } else {
                     return null;
                   }
                 },
@@ -75,9 +89,10 @@ class _SignUp extends State<SignUp> {
                     labelStyle: TextStyle(color: Colors.grey),
                     labelText: "Last Name"),
                 cursorColor: Colors.grey,
-
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 onChanged: (String value) {
                   setState(() {
@@ -155,39 +170,50 @@ class _SignUp extends State<SignUp> {
               SizedBox(
                 width: 350,
                 height: 50,
-
                 child: RaisedButton(
                   color: Colors.amber,
-                  onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => HomeScreen()));
+                  onPressed: () async {
+                    bool check = await Provider.of<AuthenticationService>(
+                            context,
+                            listen: false)
+                        .signUp(_firstname, _lastname, _email, _password);
+                    if (check)
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => HomeScreen()));
                   },
-                  child: Text("SIGN UP",style:
-                  TextStyle(fontSize: 15,color: Colors.white),),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(40))),
+                  child: Text(
+                    "SIGN UP",
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(40))),
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:<Widget> [
-                  Text("Already Have an account?",style: TextStyle(fontSize: 15,color: Colors.grey),),
+                children: <Widget>[
+                  Text(
+                    "Already Have an account?",
+                    style: TextStyle(fontSize: 15, color: Colors.grey),
+                  ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Login()));
-                    },
-                    child: Text(" Login now",style: TextStyle(fontSize: 15,color: Colors.blue),)
-                  )
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Login()));
+                      },
+                      child: Text(
+                        " Login now",
+                        style: TextStyle(fontSize: 15, color: Colors.blue),
+                      ))
                 ],
               )
-
             ],
           ),
-        )
-        ,
+        ),
       ),
     );
   }
-
 }
