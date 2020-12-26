@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:photochatapp/services/DatabaseService.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +15,9 @@ class _Database extends State<Database> {
   ScrollController scrollController;
   List<String> images = [];
   getImages() async {
-    images =
-        await Provider.of<DatabaseService>(context, listen: false).getImages();
+    images = await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid)
+        .getImages();
+    setState(() {});
   }
 
   initState() {
@@ -37,9 +40,8 @@ class _Database extends State<Database> {
             ? ListView.builder(
                 scrollDirection: Axis.vertical,
                 controller: scrollController,
-                itemCount: 3,
+                itemCount: images.length,
                 itemBuilder: (BuildContext context, int index) {
-                  print("hey");
                   return Padding(
                     padding: EdgeInsets.all(10),
                     child: Image.network(
